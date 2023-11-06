@@ -214,11 +214,15 @@ window.onload = async function () {
   try {
     var session = window.location.search.split("?session=")[1];
     if (
-      !window.location.pathname.includes("/personalization") ||
-      window.location.pathname !== "/"
+      window.location.pathname.includes("/personalization") ||
+      window.location.pathname === "/"
     ) {
       //remove session from sessionStorage
+      console.log("Rimuovo session");
       sessionStorage.removeItem("session");
+    } else if (!!session) {
+      console.log("Aggiungo session");
+      sessionStorage.setItem("session", session);
     }
     //if session is not present and url not contains /personalization or is in /
     if (
@@ -227,6 +231,7 @@ window.onload = async function () {
       window.location.pathname !== "/"
     ) {
       session = sessionStorage.getItem("session");
+      console.log("Session " + session);
       if (!!session) {
         //add session to query string if not present, without reload page without specify the page
         const url = new URL(window.location.href);
