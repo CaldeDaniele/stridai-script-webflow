@@ -1,0 +1,55 @@
+<html>
+  <head>
+    <script
+      type="module"
+      src="https://cdn.jsdelivr.net/npm/material-dynamic-colors@1.0.1/dist/cdn/material-dynamic-colors.min.js"
+    ></script>
+    <script src="./script.js"></script>
+  </head>
+  <body>
+    <div class="w-form">
+      <form
+        id="email-form"
+        name="email-form"
+        data-name="Email Form"
+        method="get"
+        data-wf-page-id="64cd0de9f01dd1eba8f45352"
+        data-wf-element-id="604dfd04-3e12-81dc-56a0-550ee43b7cbc"
+        aria-label="Email Form"
+      >
+        <label for="prompt">Prompt</label
+        ><input
+          type="text"
+          class="w-input"
+          maxlength="256"
+          name="name"
+          data-name="Name"
+          placeholder=""
+          id="prompt"
+        /><input
+          type="submit"
+          value="Submit"
+          data-wait="Please wait..."
+          id="submit-prompt"
+          class="w-button"
+        />
+      </form>
+      <div
+        class="w-form-done"
+        tabindex="-1"
+        role="region"
+        aria-label="Email Form success"
+      >
+        <div>Thank you! Your submission has been received!</div>
+      </div>
+      <div
+        class="w-form-fail"
+        tabindex="-1"
+        role="region"
+        aria-label="Email Form failure"
+      >
+        <div>Oops! Something went wrong while submitting the form.</div>
+      </div>
+    </div>
+  </body>
+</html>
