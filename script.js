@@ -213,6 +213,28 @@ var isDark = false;
 window.onload = async function () {
   try {
     var session = window.location.search.split("?session=")[1];
+    if (
+      !window.location.pathname.includes("/personalization") ||
+      window.location.pathname !== "/"
+    ) {
+      //remove session from sessionStorage
+      sessionStorage.removeItem("session");
+    }
+    //if session is not present and url not contains /personalization or is in /
+    if (
+      !session &&
+      !window.location.pathname.includes("/personalization") &&
+      window.location.pathname !== "/"
+    ) {
+      session = sessionStorage.getItem("session");
+      if (!!session) {
+        //add session to query string if not present, without reload page without specify the page
+        const url = new URL(window.location.href);
+        url.searchParams.set("session", session);
+        window.history.pushState({}, "", url);
+      }
+    }
+
     if (!!session) {
       const containerLoader = document.getElementById("container-loader");
       containerLoader.style.display = "flex";
@@ -239,6 +261,9 @@ window.onload = async function () {
       if (job.status === 200) {
         try {
           jobJson = await job.json();
+          //save session in sessionStorage
+          sessionStorage.setItem("session", session);
+
           refreshNewJob();
         } catch (error) {
           console.error(error);
@@ -353,11 +378,11 @@ window.onload = async function () {
               window.location.reload();
 
               /**refreshNewJob();
-
-      submit.disabled = false;
-      submit.innerHTML = "Submit";
-      submit.style.backgroundColor = "unset";
-      submit.value = "Submit"; */
+   
+         submit.disabled = false;
+         submit.innerHTML = "Submit";
+         submit.style.backgroundColor = "unset";
+         submit.value = "Submit"; */
             }
           }, 750);
         } catch (error) {
